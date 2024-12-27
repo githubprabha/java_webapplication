@@ -12,8 +12,7 @@ RUN yum install maven -y
 RUN yum install git -y 
 WORKDIR /app
 RUN git clone https://github.com/githubprabha/java_webapplication.git
-RUN cd /app/java_webapplication
-RUN mvn clean install
+RUN cd /app/java_webapplication && mvn clean install
 RUN chmod 777 /app/java_webapplication/shell.sh
 ENTRYPOINT ["shell.sh"]
-EXPOSE 8080
+
