@@ -4,8 +4,6 @@
 # ENTRYPOINT ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
 # EXPOSE 8080
 
-
-
 FROM amazonlinux
 RUN yum install java-17 -y 
 RUN yum install maven -y 
@@ -14,5 +12,4 @@ WORKDIR /app
 RUN git clone https://github.com/githubprabha/java_webapplication.git
 RUN cd /app/java_webapplication && mvn clean install
 RUN chmod 777 /app/java_webapplication/shell.sh
-ENTRYPOINT ["shell.sh"]
-
+ENTRYPOINT ["/app/java_webapplication/shell.sh"]
