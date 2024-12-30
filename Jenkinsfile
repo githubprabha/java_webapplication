@@ -4,7 +4,7 @@ pipeline {
     maven 'maven'
   }
      environment {
-        SCANNER_HOME = tool 'sonarqube'
+        SCANNER_HOME = tool 'sonarqube-server'
     }
     stages {
         stage('git checkout') {
@@ -19,7 +19,7 @@ pipeline {
         }
         stage('code analysis') {
             steps {
-              withSonarQubeEnv('sonarqube-server') {
+              withSonarQubeEnv('sonarqube-scanner') {
                sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=java_webapplication \
                -Dsonar.java.binaries=. \
                -Dsonar.projectKey=java_webapplication'''
