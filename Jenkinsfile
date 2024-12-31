@@ -41,7 +41,7 @@ pipeline {
         stage('docker push') {
           steps {
             script {
-              withDockerRegistry(credentialsId: 'docker-cred', url: 'https://hub.docker.com/repositories/dockerprabha2001') {
+              withDockerRegistry(credentialsId: 'docker-cred', url: 'dockerprabha2001') {
               sh 'docker push dockerprabha2001/java-web'
                   }
               }
