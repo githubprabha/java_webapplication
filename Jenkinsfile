@@ -63,11 +63,18 @@ pipeline {
           }
         }
     }
-    
+
     post {
         always {
             echo 'slack Notification.'
-            slackSend channel: '#java-ci-cd-pipeline', color: 'green', message: 'Application hosted successfully', tokenCredentialId: 'slack', username: 'ec2-user'
+            slackSend channel: '#java-ci-cd-pipeline', message: 'Build success'
+        }
+    }
+
+    post {
+        always {
+            echo 'Email Notification.'
+            emailext body: 'Your application successfully', subject: 'To check the application', to: 'soulheart2706@gmail.com'
         }
     }
 }
