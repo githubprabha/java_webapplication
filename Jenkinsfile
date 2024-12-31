@@ -67,7 +67,7 @@ pipeline {
     post {
         always {
             echo 'slack Notification.'
-            slackSend channel: '#java-ci-cd-pipeline', color: 'green', message: 'Application hosted successfully', teamDomain: ' devops-practice', tokenCredentialId: 'slack'
+            slackSend channel: '#java-ci-cd-pipeline', color: 'green', message: 'Application hosted successfully', tokenCredentialId: 'slack', username: 'ec2-user'
         }
     }
 }
