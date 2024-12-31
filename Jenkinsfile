@@ -35,12 +35,17 @@ pipeline {
         }
         stage('docker-image') {
           steps {
-            sh 'docker build -t java-web .'
+            sh 'docker build -t dockerprabha2001/java-web .'
+          }
+        }
+        stage('docker-push') {
+          steps {
+            sh 'docker push dockerprabha2001/java-web'
           }
         }
         stage('docker-container') {
           steps {
-            sh 'docker run -itd -p 8081:8080 java-web' 
+            sh 'docker run -itd -p 8081:8080 dockerprabha2001/java-web' 
           }
         }
     }
