@@ -44,10 +44,10 @@ pipeline {
           }
         }
     }
-    // post {
-    //     always {
-    //         echo 'slack Notification.'
-    //         slackSend channel: '#java-ci-cd-pipeline', message: 'Build success'
-    //     }
-    // }
+    post {
+        always {
+            echo 'slack Notification.'
+            slackSend channel: '#java-ci-cd-pipeline', message: 'Build success'
+        }
+    }
 }
