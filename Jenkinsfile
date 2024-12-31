@@ -64,12 +64,15 @@ pipeline {
         }
     }
 
-   post {
-        always {
-            echo 'slack Notification.'
-            slackSend channel: '#java-ci-cd-pipeline', message: 'Build success'
-            echo 'Email Notification.'
-            emailext body: 'Your application successfully', subject: 'To check the application', to: 'soulheart2706@gmail.com'
+    post {
+      always {
+        emailext(
+          subject: "Build Notification: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+          body: """<p>The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' has completed.</p>
+          <p>Status: ${currentBuild.currentResult}</p>
+          <p><a href='${env.BUILD_URL}'>View Build Details</a></p>""",
+          to: 'your-email@example.com'
+          )
         }
     }
 }
