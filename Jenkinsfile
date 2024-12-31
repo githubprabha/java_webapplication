@@ -26,13 +26,13 @@ pipeline {
               }
             }
         }
-        // stage('docker-stage-clear') {
-        //   steps {
-        //       sh 'docker stop $(docker ps -q)'
-        //       sh 'docker rm $(docker ps -aq)'
-        //       sh 'docker rmi $(docker images -q)'
-        //    }
-        // }
+        stage('docker-stage-clear') {
+          steps {
+              sh 'docker stop $(docker ps -q)'
+              sh 'docker rm $(docker ps -aq)'
+              sh 'docker rmi $(docker images -q)'
+           }
+        }
         stage('docker-image') {
           steps {
             sh 'docker build -t java-web .'
