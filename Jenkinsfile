@@ -71,7 +71,7 @@ pipeline {
           body: """<p>The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' has completed.</p>
           <p>Status: ${currentBuild.currentResult}</p>
           <p><a href='${env.BUILD_URL}'>View Build Details</a></p>""",
-          to: 'your-email@example.com'
+          to: 'soulheart2706@gmail.com'
           )
         }
     }
