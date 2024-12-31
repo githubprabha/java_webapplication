@@ -68,9 +68,9 @@ pipeline {
       always {
         emailext(
           subject: "Build Notification: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-          body: """<p>The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' has completed.</p>
-          <p>Status: ${currentBuild.currentResult}</p>
-          <p><a href='${env.BUILD_URL}'>View Build Details</a></p>""",
+          body: """The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' has completed.
+          Status: ${currentBuild.currentResult}
+          href='${env.BUILD_URL}'>View Build Details""",
           to: 'soulheart2706@gmail.com'
           )
         }
