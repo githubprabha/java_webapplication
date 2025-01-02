@@ -7,4 +7,5 @@ FROM openjdk:17-jdk
 WORKDIR /app
 COPY --from=build /maven/target/app-0.0.1-SNAPSHOT.war /app/app-0.0.1-SNAPSHOT.war
 CMD ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
+# ENTRYPOINT ["java", "-jar", "app-0.0.1-SNAPSHOT.war"]
 EXPOSE 8080
