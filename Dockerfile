@@ -1,5 +1,5 @@
 FROM maven AS build
-RUN yum install git -y
+RUN apt update && apt install git -y
 WORKDIR /maven
 RUN git clone https://github.com/githubprabha/java_webapplication.git /maven
 RUN  mvn clean install
