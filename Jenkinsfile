@@ -6,6 +6,11 @@ pipeline {
       maven 'maven'
     }
     
+    triggers {
+      pollSCM('5 * * * *')
+      cron('5 * * * *')
+    }
+
     environment {
       SCANNER_HOME = tool 'sonarqube-server'
     }
@@ -24,15 +29,15 @@ pipeline {
             }
         }
 
-        stage('code analysis') {
-          steps {
-            withSonarQubeEnv('sonarqube-scanner') {
-              sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=java_webapplication \
-              -Dsonar.java.binaries=. \
-              -Dsonar.projectKey=java_webapplication'''
-              }
-            }
-        }
+        // stage('code analysis') {
+        //   steps {
+        //     withSonarQubeEnv('sonarqube-scanner') {
+        //       sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=java_webapplication \
+        //       -Dsonar.java.binaries=. \
+        //       -Dsonar.projectKey=java_webapplication'''
+        //       }
+        //     }
+        // }
         
         stage('docker-stage-clear') {
           steps {
@@ -48,15 +53,15 @@ pipeline {
           }
         }
 
-        stage('docker push') {
-          steps {
-            script {
-              withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                sh 'docker push dockerprabha2001/java-web'
-                }
-              }
-            }
-          }
+        // stage('docker push') {
+        //   steps {
+        //     script {
+        //       withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
+        //         sh 'docker push dockerprabha2001/java-web'
+        //         }
+        //       }
+        //     }
+        //   }
 
         stage('docker-container') {
           steps {
@@ -65,20 +70,20 @@ pipeline {
         }
     }
 
-    post {
-      always {
-            echo 'slack Notification.'
-            slackSend channel: '#java-ci-cd-pipeline',
-            color: COLOR_MAP [currentBuild.currentResult],
-            message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URl}"
+    // post {
+    //   always {
+    //         echo 'slack Notification.'
+    //         slackSend channel: '#java-ci-cd-pipeline',
+    //         color: COLOR_MAP [currentBuild.currentResult],
+    //         message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URl}"
             
-            emailext(
-              subject: "Build Notification: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-              body: """The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' has completed.
-              Status: ${currentBuild.currentResult}
-              href='${env.BUILD_URL}'>View Build Details""",
-              to: 'soulheart2706@gmail.com'
-            )
-        }
-    }
+    //         emailext(
+    //           subject: "Build Notification: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+    //           body: """The job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' has completed.
+    //           Status: ${currentBuild.currentResult}
+    //           href='${env.BUILD_URL}'>View Build Details""",
+    //           to: 'soulheart2706@gmail.com'
+    //         )
+    //     }
+    // }
 }
