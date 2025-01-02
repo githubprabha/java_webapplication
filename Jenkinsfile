@@ -7,8 +7,8 @@ pipeline {
     }
     
     triggers {
-      pollSCM('5 * * * *')
-      cron('5 * * * *')
+      pollSCM('3 * * * *')
+      cron('2 * * * *')
     }
 
     environment {
