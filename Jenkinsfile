@@ -11,9 +11,9 @@ pipeline {
       cron('2 * * * *')
     }
 
-    environment {
-      SCANNER_HOME = tool 'sonarqube-server'
-    }
+    // environment {
+    //   SCANNER_HOME = tool 'sonarqube-server'
+    // }
 
     stages {
       
