@@ -1,0 +1,40 @@
+pipeline {
+    agent any 
+    
+    tools {
+      maven 'maven'
+    }
+    
+    triggers {
+      pollSCM('3 * * * *')
+      cron('2 * * * *')
+    }
+
+    stages {
+      
+      stage('git checkout') {
+        steps {
+          git 'https://github.com/githubprabha/java_webapplication.git'
+          }
+        }
+        
+        stage('install') {
+          steps {
+            bat 'mvn clean install'
+            }
+        }
+        
+        stage('docker-image') {
+          steps {
+            bat 'docker build -t dockerprabha2001/java-web .'
+          }
+        }
+
+        stage('docker-container') {
+          steps {
+            bat 'docker run -itd -p 8081:8080 dockerprabha2001/java-web' 
+          }
+        }
+    }
+    
+}
