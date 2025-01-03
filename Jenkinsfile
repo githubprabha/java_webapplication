@@ -16,6 +16,12 @@ pipeline {
     }
 
     stages {
+
+      stage(clean workspace){
+        steps{
+          cleanWs ()
+        }
+      }
       
       stage('git checkout') {
         steps {
@@ -56,7 +62,7 @@ pipeline {
       stage('trivy') {
         steps {
           script {
-            sh 'trivy image -f table -o myimage.html dockerprabha2001/java-web'
+            sh 'trivy image -f table -o report.html dockerprabha2001/java-web'
           }
         }
       }
