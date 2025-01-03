@@ -23,11 +23,11 @@ pipeline {
         }
       }
       
-      stage('git checkout') {
-        steps {
-          git 'https://github.com/githubprabha/java_webapplication.git'
-        }
-      }
+      // stage('git checkout') {
+      //   steps {
+      //     git 'https://github.com/githubprabha/java_webapplication.git'
+      //   }
+      // }
         
       stage('compile') {
         steps {
@@ -48,7 +48,7 @@ pipeline {
       stage('trivy-filescan') {
         steps {
           script {
-            sh 'trivy fs -f json -o myfile.html .'
+            sh 'trivy fs -f json -o file-report.json .'
             
           }
         }
