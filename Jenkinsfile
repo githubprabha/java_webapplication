@@ -23,11 +23,11 @@ pipeline {
         }
       }
       
-      // stage('git checkout') {
-      //   steps {
-      //     git 'https://github.com/githubprabha/java_webapplication.git'
-      //   }
-      // }
+      stage('git checkout') {
+        steps {
+          git 'https://github.com/githubprabha/java_webapplication.git'
+        }
+      }
         
       stage('compile') {
         steps {
