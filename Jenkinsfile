@@ -62,7 +62,8 @@ pipeline {
       stage('trivy') {
         steps {
           script {
-            sh 'trivy image -f table -o report.html dockerprabha2001/java-web'
+            // sh 'trivy image -f table -o report.html dockerprabha2001/java-web'
+            sh 'trivy fs --security-checks vuln java_webapplication'
           }
         }
       }
