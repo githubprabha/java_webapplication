@@ -44,7 +44,16 @@ pipeline {
           }
         }
       }
-        
+      
+      stage('trivy-filescan') {
+        steps {
+          script {
+            sh 'trivy fs -f json -o myfile.html .'
+            
+          }
+        }
+      }
+
       stage('docker-stage-clear') {
         steps {
           sh 'docker stop $(docker ps -q) || true'
@@ -63,7 +72,7 @@ pipeline {
         steps {
           script {
             sh 'trivy image -f table -o report.html dockerprabha2001/java-web'
-            // sh 'trivy fs --security-checks config java_webapplication'
+            
           }
         }
       }
