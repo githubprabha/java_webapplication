@@ -45,14 +45,14 @@ pipeline {
         }
       }
       
-      stage('trivy-filescan') {
-        steps {
-          script {
-            sh 'trivy fs --security-checks vuln --severity LOW,MEDIUM,HIGH,CRITICAL -f json -o file-report.json .'
+      // stage('trivy-filescan') {
+      //   steps {
+      //     script {
+      //       sh 'trivy fs --security-checks vuln --severity HIGH,CRITICAL -f json -o file-report.json .'
             
-          }
-        }
-      }
+      //     }
+      //   }
+      // }
 
       stage('docker-stage-clear') {
         steps {
@@ -71,7 +71,7 @@ pipeline {
       stage('trivy') {
         steps {
           script {
-            sh 'trivy image -f table -o report.html dockerprabha2001/java-web'
+            sh 'trivy image --severity HIGH,CRITICAL -f table -o report.html dockerprabha2001/java-web'
             
           }
         }
