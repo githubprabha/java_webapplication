@@ -48,7 +48,7 @@ pipeline {
       stage('trivy-filescan') {
         steps {
           script {
-            sh 'trivy fs security-checks vuln -f json -o file-report.json .'
+            sh 'trivy fs --security-checks vuln --severity LOW,MEDIUM,HIGH,CRITICAL -f json -o file-report.json .'
             
           }
         }
