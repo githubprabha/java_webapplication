@@ -61,15 +61,15 @@ pipeline {
             }
         }
 
-        stage('docker push') {
-          steps {
-            script {
-              withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                sh 'docker push dockerprabha2001/java-web'
-                }
-              }
-            }
-          }
+        // stage('docker push') {
+        //   steps {
+        //     script {
+        //       withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
+        //         sh 'docker push dockerprabha2001/java-web'
+        //         }
+        //       }
+        //     }
+        //   }
 
         stage('docker-container') {
           steps {
